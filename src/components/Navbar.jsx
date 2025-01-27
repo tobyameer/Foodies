@@ -5,7 +5,7 @@ import { FaUser } from "react-icons/fa";
 import Logo from "../images/logo.jpg";
 const Navbar = () => {
   return (
-    <div className="fixed w-screen px-[28px] h-[100px] bg-inherit text-white flex justify-between items-center ">
+    <div className="z-99 fixed w-screen px-[28px] h-[100px] bg-inherit text-white flex justify-between items-center ">
       <img src={Logo} alt="" className="w-[50px] rounded-full" />
       <div className="flex gap-10 text-[14px]">
         <p>Home</p>

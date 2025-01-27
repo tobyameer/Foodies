@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Slider from "../components/Slider";
+import Market from "../components/Market";
 
 const Home = () => {
   // const [menu, setMenu] = useState([]);
@@ -40,6 +41,7 @@ const Home = () => {
         <Navbar />
         <Hero />
         <Slider />
+        <Market />
       </div>
     </div>
   );
