@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import Slider from "../components/Slider";
 
 const Home = () => {
   // const [menu, setMenu] = useState([]);
@@ -33,8 +36,11 @@ const Home = () => {
   console.log("hi");
   return (
     <div>
-      <Nav></Nav>
-      <div>Chicken beef dessert pasta seafood vegan Vegetarian other</div>
+      <div>
+        <Navbar />
+        <Hero />
+        <Slider />
+      </div>
     </div>
   );
 };
