@@ -27,7 +27,7 @@ const Market = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center mx-[100px]">
       <h1 className="my-[150px] text-[44px] border-b-8 border-black rounded-b-lg">
         Random Meals
       </h1>
@@ -52,7 +52,7 @@ const Market = () => {
             food.map((meal, index) => (
               <div
                 key={index}
-                className="hover:tra pb-1 w-[150px] md:w-[200px] xl:w-[300px] shadow-xl rounded-t-2xl"
+                className=" pb-1 w-[100%] shadow-xl rounded-t-2xl"
               >
                 <img
                   src={meal.strMealThumb}
