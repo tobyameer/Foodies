@@ -28,9 +28,9 @@ const Market = () => {
 
   return (
     <div className="flex flex-col items-center mx-[100px]">
-      <h1 className="my-[150px] text-[44px] border-b-8 border-black rounded-b-lg">
+      {/* <h1 className="my-[150px] text-[44px] border-b-8 border-black rounded-b-lg">
         Random Meals
-      </h1>
+      </h1> */}
       <div className="grid lg:grid-cols-4 grid-cols-2 gap-[50px] justify-center items-center">
         {loading
           ? // Show placeholders while loading

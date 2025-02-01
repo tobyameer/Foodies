@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-const Slider = () => {
+const Slider = ({ onFilterChange }) => {
   const [food, setFood] = useState([]);
 
   useEffect(() => {
@@ -31,7 +31,8 @@ const Slider = () => {
         <div className="w-screen h-[200px] flex items-center">
           <div className="flex text-center gap-10 ">
             {food.map((item, index) => (
-              <div
+              <button
+                onClick={() => onFilterChange(item.strCategory)}
                 key={index}
                 className="flex-shrink-0 mx-[15px] categoriesStr"
               >
@@ -43,7 +44,7 @@ const Slider = () => {
                 <p className="my-4 text-[14px]  md:text-[18px]">
                   {item.strCategory}
                 </p>
-              </div>
+              </button>
             ))}
           </div>
           {/* <div className="absolute right-0  bg-green-200 w-[100px] h-[300px]" /> */}

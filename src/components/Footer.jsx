@@ -31,7 +31,7 @@ const Footer = () => {
           English
           <FaAngleDown />
         </button>
-        <p className="my-[15px] text-[14px] text-[#9D9D9D]">Netflix Egypt</p>
+        <p className="my-[15px] text-[14px] text-[#9D9D9D]">Foodies Egypt</p>
       </div>
     </div>
   );
