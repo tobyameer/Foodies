@@ -97,4 +97,24 @@ code {
   .categoriesStr:hover span {
     transform: translate3d(-200%, 0, 0);
   }
-   
+ /* Custom navigation buttons */
+
+
+ 
+ .custom-button-next,
+ .custom-button-prev {
+   height: 200px;
+   background: #000;
+  }
+  
+   .custom-button-next::after,
+  .custom-button-prev::after {
+    display: none; /* Hide default arrow icons */
+  }
+
+.custom-button-next:hover,
+.custom-button-prev:hover {
+  background-color: rgba(27, 27, 27, 0.421);
+}
+
+

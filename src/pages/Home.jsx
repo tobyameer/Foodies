@@ -5,6 +5,7 @@ import Hero from "../components/Hero";
 import Slider from "../components/Slider";
 import Market from "../components/Market";
 import Featured from "../components/Featured";
+import Footer from "../components/Footer";
 
 const Home = () => {
   // const [menu, setMenu] = useState([]);
@@ -38,13 +39,12 @@ const Home = () => {
   console.log("hi");
   return (
     <div>
-      <div>
-        <Navbar />
-        <Hero />
-        <Slider />
-        <Market />
-        <Featured />
-      </div>
+      <Navbar />
+      <Hero />
+      <Slider />
+      <Market />
+      <Featured />
+      <Footer />
     </div>
   );
 };
