@@ -9,20 +9,20 @@ import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const navigate = useNavigate();
+  // const [selectedCategory, setSelectedCategory] = useState("");
+  // const navigate = useNavigate();
 
-  const handleFilterChange = (category) => {
-    console.log(category);
-    setSelectedCategory(category);
-    navigate("/search", { state: { category } });
-  };
+  // const handleFilterChange = (category) => {
+  //   console.log(category);
+  //   setSelectedCategory(category);
+  //   navigate("/search", { state: { category } });
+  // };
   return (
     <div>
       <Navbar scrollUnit={500} />
       <Hero />
-      <Slider onFilterChange={handleFilterChange} />
-      <Market category={selectedCategory} />
+      <Slider />
+      <Market />
       <Featured />
       <Footer />
     </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { IoSearch } from "react-icons/io5";
 
-const SearchFilter = () => {
+const SearchFilter = ({ handleCategory }) => {
   const [categories, setCategories] = useState([]);
   const [countries, setCountries] = useState([]);
   const [categoryClicked, setCategoryClicked] = useState(false);
@@ -56,6 +56,7 @@ const SearchFilter = () => {
               <div>
                 {categories.map((items, i) => (
                   <div
+                    onClick={() => handleCategory(items.strCategory)}
                     key={i}
                     className="px-4 h-[50px] flex justify-between items-center border-t"
                   >

@@ -11,17 +11,29 @@ const Search = () => {
   const location = useLocation();
   const [food, setFood] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("");
 
   const { category } = location.state || {};
 
   useEffect(() => {
     const fetchFilteredMeals = async () => {
       try {
-        const res = await axios.get(
-          `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
-        );
-        setFood(res.data.meals);
-        console.log(res.data);
+        if (filter === "") {
+          const meals = [];
+          for (let i = 0; i < 20; i++) {
+            const res = await axios.get(
+              "https://www.themealdb.com/api/json/v1/1/random.php"
+            );
+            meals.push(res.data.meals[0]);
+          }
+          console.log(meals);
+          setFood(meals);
+        } else {
+          const res = await axios.get(
+            `https://www.themealdb.com/api/json/v1/1/filter.php?c=${filter}`
+          );
+          setFood(res.data.meals);
+        }
       } catch (err) {
         console.log("err : ", err.message?.data || err.message);
       } finally {
@@ -29,18 +41,20 @@ const Search = () => {
       }
     };
     fetchFilteredMeals();
-  }, []);
+  }, [filter]);
+
+  const newCategory = (newCategory) => {
+    setFilter(newCategory);
+    console.log(filter);
+  };
 
   return (
     <div className="">
       <Navbar scrollUnit={200} />
       <div className="bg-[#084130] h-[200px]"></div>
       <div className="wave h-[120px]" />
-      <SearchFilter />
+      <SearchFilter handleCategory={newCategory} />
       <div className="pt-[200px] flex flex-col items-center mx-[100px]">
-        {/* <h1 className="my-[150px] text-[44px] border-b-8 border-black rounded-b-lg">
-              Random Meals
-            </h1> */}
         <div className="grid lg:grid-cols-4 grid-cols-2 gap-[50px] justify-center items-center">
           {loading
             ? // Show placeholders while loading
@@ -54,7 +68,6 @@ const Search = () => {
                     <div className="h-[20px] bg-gray-300 rounded-md animate-pulse"></div>
                     <div className="h-[15px] bg-gray-300 rounded-md animate-pulse w-[70%]"></div>
                     <div className="h-[40px]"></div>
-                    {/* Hidden price and buttons */}
                   </div>
                 </div>
               ))
@@ -99,22 +112,5 @@ const Search = () => {
     </div>
   );
 };
-
-// export default Search;
-// import React from "react";
-// import { useLocation } from "react-router-dom";
-
-// const Search = () => {
-//   const location = useLocation();
-//   const { category } = location.state || {};  // Destructure category from location.state
-
-//   return (
-//     <div>
-//       <h1>Search Results</h1>
-//       <p>Selected Category: {category}</p>
-//       {/* You can now make an API call based on the selected category */}
-//     </div>
-//   );
-// };
 
 export default Search;
