@@ -3,11 +3,15 @@ import Navbar from "../../components/Navbar";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { FaPlus, FaMinus } from "react-icons/fa6";
+import Footer from "../../components/Footer";
+import Slider from "../Home/components/Slider";
+import SearchFilter from "./components/SearchFilter";
 
 const Search = () => {
   const location = useLocation();
   const [food, setFood] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const { category } = location.state || {};
 
   useEffect(() => {
@@ -32,6 +36,7 @@ const Search = () => {
       <Navbar scrollUnit={200} />
       <div className="bg-[#084130] h-[200px]"></div>
       <div className="wave h-[120px]" />
+      <SearchFilter />
       <div className="pt-[200px] flex flex-col items-center mx-[100px]">
         {/* <h1 className="my-[150px] text-[44px] border-b-8 border-black rounded-b-lg">
               Random Meals
@@ -90,6 +95,7 @@ const Search = () => {
               ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

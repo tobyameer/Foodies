@@ -22,8 +22,8 @@ const Slider = ({ onFilterChange }) => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center my-[300px]">
-      <div className="my-[50px] flex justify-center items-center text-[44px] ">
+    <div className="flex flex-col justify-center items-center">
+      <div className="flex justify-center items-center text-[44px] ">
         <h1 className="border-b-8 border-black rounded-b-lg">Categories</h1>
       </div>
       {/* <div className="absolute z-[9] border-x-5 bg-white w-[100px] h-[300px]" /> */}
