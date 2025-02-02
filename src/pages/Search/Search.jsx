@@ -4,35 +4,45 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import Footer from "../../components/Footer";
-import Slider from "../Home/components/Slider";
 import SearchFilter from "./components/SearchFilter";
+import { IoMdClose } from "react-icons/io";
 
 const Search = () => {
-  const location = useLocation();
   const [food, setFood] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState("");
-
-  const { category } = location.state || {};
+  const [itemFilter, setItemFilter] = useState([]);
 
   useEffect(() => {
     const fetchFilteredMeals = async () => {
       try {
-        if (filter === "") {
+        if (itemFilter.length === 0) {
           const meals = [];
           for (let i = 0; i < 20; i++) {
-            const res = await axios.get(
+            const res1 = await axios.get(
               "https://www.themealdb.com/api/json/v1/1/random.php"
             );
-            meals.push(res.data.meals[0]);
+            meals.push(res1.data.meals[0]);
           }
-          console.log(meals);
           setFood(meals);
         } else {
-          const res = await axios.get(
-            `https://www.themealdb.com/api/json/v1/1/filter.php?c=${filter}`
-          );
-          setFood(res.data.meals);
+          for (let i = 0; i < itemFilter.length; i++) {
+            const meals = [];
+            const requests = itemFilter.map((category) =>
+              axios.get(
+                `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
+              )
+            );
+
+            const responses = await Promise.all(requests);
+
+            // Extract meals from responses
+            responses.forEach((res, index) => {
+              console.log(itemFilter[index]); // Log category
+              meals.push(...res.data.meals); // Add all meals from each category
+            });
+            console.log(meals);
+            setFood(meals);
+          }
         }
       } catch (err) {
         console.log("err : ", err.message?.data || err.message);
@@ -41,11 +51,16 @@ const Search = () => {
       }
     };
     fetchFilteredMeals();
-  }, [filter]);
+  }, [itemFilter]);
 
   const newCategory = (newCategory) => {
-    setFilter(newCategory);
-    console.log(filter);
+    setItemFilter(newCategory);
+    console.log(itemFilter);
+  };
+
+  const handleDeleteFilter = (item) => {
+    setItemFilter((prev) => prev.filter((category) => category !== item));
+    console.log(itemFilter);
   };
 
   return (
@@ -54,6 +69,24 @@ const Search = () => {
       <div className="bg-[#084130] h-[200px]"></div>
       <div className="wave h-[120px]" />
       <SearchFilter handleCategory={newCategory} />
+      <div className="mx-[200px]">
+        <div className="flex w-[100%] gap-5 pt-5">
+          {itemFilter.map((i, x) => (
+            <button
+              key={x}
+              className="fill duration-300 px-4 border border-yellow-400/70 text-[#084130] size-fit h-[50px] text-[17px] flex items-center  rounded-full"
+            >
+              <p className="pr-1">{i}</p>
+
+              <IoMdClose
+                onClick={() => handleDeleteFilter(i)}
+                size={22}
+                className=" rounded-full text-[#084130]"
+              />
+            </button>
+          ))}
+        </div>
+      </div>
       <div className="pt-[200px] flex flex-col items-center mx-[100px]">
         <div className="grid lg:grid-cols-4 grid-cols-2 gap-[50px] justify-center items-center">
           {loading
