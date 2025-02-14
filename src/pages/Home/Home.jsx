@@ -19,9 +19,12 @@ const Home = () => {
   // };
   return (
     <div>
-      <Navbar scrollUnit={500} />
+      <div className="text-white bg-black text-center h-[50px] text-[18px] font-semibold flex justify-center items-center">
+        <p>New Deals Order Now!</p>
+      </div>
+      <Navbar />
       <Hero />
-      <Slider />
+      {/* <Slider /> */}
       <Market />
       <Featured />
       <Footer />

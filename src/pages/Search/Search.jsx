@@ -40,7 +40,6 @@ const Search = () => {
               console.log(itemFilter[index]); // Log category
               meals.push(...res.data.meals); // Add all meals from each category
             });
-            console.log(meals);
             setFood(meals);
           }
         }
@@ -55,12 +54,10 @@ const Search = () => {
 
   const newCategory = (newCategory) => {
     setItemFilter(newCategory);
-    console.log(itemFilter);
   };
 
   const handleDeleteFilter = (item) => {
     setItemFilter((prev) => prev.filter((category) => category !== item));
-    console.log(itemFilter);
   };
 
   return (
@@ -68,7 +65,7 @@ const Search = () => {
       <Navbar scrollUnit={200} />
       <div className="bg-[#084130] h-[200px]"></div>
       <div className="wave h-[120px]" />
-      <SearchFilter handleCategory={newCategory} />
+      <SearchFilter food={food} handleCategory={newCategory} />
       <div className="mx-[200px]">
         <div className="flex w-[100%] gap-5 pt-5">
           {itemFilter.map((i, x) => (

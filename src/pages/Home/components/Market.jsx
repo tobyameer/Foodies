@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Market = () => {
   const [food, setFood] = useState([]);
@@ -28,6 +29,7 @@ const Market = () => {
 
   return (
     <div className="flex flex-col items-center mx-[100px]">
+      <h1 className="font-semibold text-[60px] mb-[100px] mt-[250px]">Meals</h1>
       {/* <h1 className="my-[150px] text-[44px] border-b-8 border-black rounded-b-lg">
         Random Meals
       </h1> */}
@@ -84,6 +86,11 @@ const Market = () => {
               </div>
             ))}
       </div>
+      <Link to="/search">
+        <button className="mt-[100px] text-[25px] w-[300px] h-[50px]  rounded-full ">
+          Explore Meals
+        </button>
+      </Link>
     </div>
   );
 };

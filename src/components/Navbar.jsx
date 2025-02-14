@@ -3,49 +3,53 @@ import { FaShoppingCart } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import Logo from "../images/logo.jpg";
-const Navbar = ({ scrollUnit }) => {
-  const [scroll, setScroll] = useState(false);
+import { Link } from "react-router-dom";
+
+const Navbar = () => {
+  const [isSticky, setIsSticky] = useState(false);
+  const [nav, setNav] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > scrollUnit) {
-        setScroll(true);
-      } else {
-        setScroll(false);
-      }
+      setIsSticky(window.scrollY > 50); // Navbar becomes sticky after scrolling past 50px
+      setNav(window.scrollY > 780); // Navbar becomes sticky after scrolling past 50px
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div
-      className={
-        scroll
-          ? "z-[99] fixed w-screen px-[28px] h-[100px] bg-white/90 text-black flex justify-between items-center "
-          : "z-[99] fixed w-screen px-[28px] h-[100px] bg-inherit text-white flex justify-between items-center "
-      }
+      className={`w-full fixed left-0 z-[99] px-[28px] h-[100px] flex justify-between items-center transition-all duration-500 ${
+        nav
+          ? "top-0 text-black bg-white shadow-md"
+          : "bg-transparent text-white"
+      } ${
+        isSticky
+          ? "top-0  bg-white/90 text-black"
+          : "top-[50px] bg-transparent "
+      }`}
     >
-      <img src={Logo} alt="" className="w-[50px] rounded-full" />
+      <img src={Logo} alt="Logo" className="w-[50px] rounded-full" />
+
       <div className="flex gap-10 text-[14px]">
-        <p>Home</p>
+        <Link to="/">
+          <p>Home</p>
+        </Link>
         <p>About</p>
         <p>Service</p>
       </div>
-      <div className="flex gap-5">
-        <IoSearch />
-        <FaShoppingCart />
-        <FaUser />
-      </div>
 
-      {/* <div className="flex bg-white rounded-full w-[500px] items-center pl-2 h-[33px]">
-        <IoSearch color="black" />
-        <input type="text" />
-        </div> */}
+      <div className="flex gap-5">
+        <Link to="/search">
+          <IoSearch className="cursor-pointer" />
+        </Link>
+        <FaShoppingCart className="cursor-pointer" />
+        <Link to="/profile">
+          <FaUser className="cursor-pointer" />
+        </Link>
+      </div>
     </div>
   );
 };

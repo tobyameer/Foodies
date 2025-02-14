@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import SearchSearchBar from "./SearchSearchBar";
 import { IoSearch } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import { FaCheck } from "react-icons/fa";
 
-const SearchFilter = ({ handleCategory }) => {
+const SearchFilter = ({ handleCategory, food }) => {
   const [categories, setCategories] = useState([]);
   const [countries, setCountries] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -47,24 +48,16 @@ const SearchFilter = ({ handleCategory }) => {
   const handleFilterClose = () => {
     setOpenFilter(false);
     handleCategory(selectedCategories); // Call the provided function
-    console.log(selectedCategories);
   };
 
   return (
     <div className="mx-[200px]">
-      <div className="pl-3 w-[100%] h-[50px] bg-[#E6ECEA] flex items-center rounded-t-3xl">
-        <IoSearch size={26} className="text-[#084130]" />
-        <input
-          type="text"
-          placeholder="Search"
-          className="pl-[30px] bg-inherit text-[#084130] placeholder:text-[#084130] outline-none"
-        />
-      </div>
+      <SearchSearchBar food={food} />
       {/* Filter */}
       <div className="relative flex w-[100%]">
         <button
           onClick={() => setOpenFilter(!openFilter)}
-          className="w-[fill] h-[70px] bg-[#64887D] text-[20px]"
+          className="w-[fill] h-[70px] bg-[#64887D] text-[20px] rounded-t-none border-none"
         >
           Filters
         </button>

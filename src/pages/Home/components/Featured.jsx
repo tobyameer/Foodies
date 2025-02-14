@@ -7,10 +7,12 @@ import "swiper/css/navigation"; // Import navigation styles
 import "swiper/css/pagination"; // Import pagination styles
 import { Navigation, Pagination } from "swiper/modules";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6"; // Import icons
+import { FaStar } from "react-icons/fa";
 
 const Featured = () => {
   const [food, setFood] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [swiperRef, setSwiperRef] = useState(null); // State to hold the swiper instance
 
   useEffect(() => {
     const fetchMeal = async () => {
@@ -45,6 +47,7 @@ const Featured = () => {
       </div>
       <div className="relative">
         <Swiper
+          onSwiper={setSwiperRef} // Set the swiper instance
           modules={[Navigation, Pagination]}
           spaceBetween={30}
           slidesPerView={3}
@@ -60,36 +63,59 @@ const Featured = () => {
             320: {
               slidesPerView: 1,
             },
-            768: {
-              slidesPerView: 2,
+            860: {
+              slidesPerView: 1,
             },
             1024: {
-              slidesPerView: 3,
+              slidesPerView: 2,
             },
           }}
         >
           {food.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="relative bg-gray-200 p-2 rounded-md">
-                <img
-                  className=" w-[400px] h-[300px] object-cover"
-                  src={item.strMealThumb}
-                  alt={item.strMeal}
-                />
-                <p className="absolute top-10 w-[180px] truncate text-white bg-green-800 ">
-                  {item.strMeal}
-                </p>
+              <div className="flex bg-gray-200 p-2 rounded-md">
+                <div className="flex-none w-[250px]">
+                  <img
+                    className="w-full h-[250px] object-cover rounded-md"
+                    src={item.strMealThumb}
+                    alt={item.strMeal}
+                  />
+                </div>
+                <div className="m-3 flex flex-col justify-evenly">
+                  <h1 className="font-semibold text-[20px] ">{item.strMeal}</h1>
+                  <div className="flex">
+                    <FaStar size={25} className="text-yellow-500" />
+                    <FaStar size={25} className="text-yellow-500" />
+                    <FaStar size={25} className="text-yellow-500" />
+                    <FaStar size={25} className="text-yellow-500" />
+                    <FaStar size={25} className="text-yellow-500" />
+                  </div>
+                  <div>
+                    <a
+                      href={item.strSource}
+                      className="px-1 text-[#457063] hover:text-[#084130] rounded-full"
+                    >
+                      Website
+                    </a>
+                    <p className="line-clamp-2 ">{item.strInstructions}</p>
+                  </div>
+                </div>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
 
         {/* Custom navigation buttons */}
-        {/* Custom navigation buttons */}
-        <div className="custom-prev absolute top-0 left-[-50px] z-10 cursor-pointer w-[50px] h-[300px] flex items-center justify-center rounded-l-md">
+        <div
+          className="custom-prev absolute top-0 left-[-50px] z-10 cursor-pointer w-[50px] h-[300px] flex items-center justify-center rounded-l-md"
+          onClick={() => swiperRef.slidePrev()} // Use swiper instance to go to previous slide
+        >
           <FaChevronLeft size={30} className="text-gray-400" />
         </div>
-        <div className="custom-next absolute top-0 right-[-50px] z-10 cursor-pointer w-[50px] h-[300px] flex items-center justify-center  rounded-r-md">
+        <div
+          className="custom-next absolute top-0 right-[-50px] z-10 cursor-pointer w-[50px] h-[300px] flex items-center justify-center rounded-r-md"
+          onClick={() => swiperRef.slideNext()} // Use swiper instance to go to next slide
+        >
           <FaChevronRight size={30} className="text-gray-400" />
         </div>
       </div>
